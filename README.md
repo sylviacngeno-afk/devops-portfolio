@@ -8,8 +8,8 @@ Each project in this repo represents a real, hands-on build — not just a tutor
 
 | Project | Skills Demonstrated | Status |
 |---|---|---|
-| [Linux Automation Toolkit](./linux-automation-toolkit) | Bash scripting, user/permission management, process control | 🚧 In Progress |
-| [Dockerized Web Application](./dockerized-web-app) | Containerization, Docker, application packaging | 🔜 Planned |
+| [Linux Automation Toolkit](./linux-automation-toolkit) | Bash scripting, user/permission management, process control | ✅ Complete |
+| [Dockerized Web Application](./dockerized-web-app) | Containerization, Docker, application packaging | ✅ Complete |
 | [GitHub Actions CI/CD Pipeline](./github-actions-cicd) | CI/CD, automated testing/deployment | 🔜 Planned |
 | [AWS VPC with Terraform](./aws-vpc-terraform) | Infrastructure as Code, AWS networking | 🔜 Planned |
 | [Kubernetes Deployment](./kubernetes-deployment) | Container orchestration, K8s manifests | 🔜 Planned |
