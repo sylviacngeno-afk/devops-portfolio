@@ -1,4 +1,4 @@
-name: Docker Web App CI
+name: Docker Web App CI/CD
 
 on:
   push:
@@ -37,3 +37,41 @@ jobs:
       - name: Clean up container
         if: always()
         run: docker rm -f ci-test-container
+
+  push-image:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        working-directory: ./dockerized-web-app
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio-site:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio-site:latest
+
+  deploy:
+    needs: push-image
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio-site:latest
+            docker rm -f devops-site || true
+            docker run -d -p 8080:80 --name devops-site ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio-site:latest
