@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sylvia Ng'eno — DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12172A;
+    --ink-soft: #1B2238;
+    --cream: #EEE7DA;
+    --muted: #96A0B5;
+    --rust: #B5502D;
+    --rust-bright: #D96A44;
+    --sage: #8A9A5B;
+    --slate: #4C5A72;
+    --line: rgba(238,231,218,0.12);
+    --max: 880px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rust-bright);
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(18,23,42,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  nav .brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+  }
+  nav .links { display: flex; gap: 26px; }
+  nav .links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s ease;
+  }
+  nav .links a:hover { color: var(--rust-bright); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 90px 0 70px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 44px;
+    align-items: center;
+  }
+  .hero img {
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--rust);
+    box-shadow: 0 0 0 8px var(--ink-soft);
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 4vw, 3rem);
+    color: var(--cream);
+  }
+  .hero .role {
+    margin-top: 8px;
+    font-size: 1.05rem;
+    color: var(--rust-bright);
+    font-weight: 500;
+  }
+  .hero .pitch {
+    margin-top: 16px;
+    max-width: 58ch;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  .contact-row {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .contact-row a { text-decoration: none; }
+  .contact-row a:hover { color: var(--rust-bright); }
+  .contact-row span.dot { color: var(--slate); }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section .eyebrow { margin-bottom: 10px; display: block; }
+  section h2 { font-size: 1.6rem; color: var(--cream); margin-bottom: 22px; }
+
+  .summary p {
+    max-width: 68ch;
+    color: #D6D0C4;
+    font-size: 1.05rem;
+  }
+
+  /* ---------- JOURNEY (signature element) ---------- */
+  .journey svg { width: 100%; height: auto; display: block; }
+  .journey-caption {
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .node-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+  }
+  .node-year { fill: var(--rust-bright); }
+  .node-text { fill: var(--muted); }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 40px;
+  }
+  .skill-group h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--cream);
+    background: var(--ink-soft);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .job { margin-bottom: 40px; }
+  .job:last-child { margin-bottom: 0; }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 6px;
+  }
+  .job-title { font-size: 1.1rem; font-weight: 600; font-family: 'Fraunces', serif; color: var(--cream); }
+  .job-dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--rust-bright);
+  }
+  .job-org { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
+  .job ul { margin: 0; padding-left: 20px; color: #D6D0C4; }
+  .job li { margin-bottom: 6px; font-size: 0.95rem; }
+
+  /* ---------- CERTS / EDU ---------- */
+  .cert-edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .cert-edu-grid h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .cert-edu-grid ul { list-style: none; margin: 0; padding: 0; }
+  .cert-edu-grid li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+    color: #D6D0C4;
+  }
+  .cert-edu-grid li:last-child { border-bottom: none; }
+  .cert-edu-grid .sub { color: var(--muted); font-size: 0.82rem; display: block; margin-top: 2px; }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 56px 0 70px; text-align: center; }
+  footer .eyebrow { display: block; margin-bottom: 14px; }
+  footer h2 { font-size: 1.5rem; margin-bottom: 18px; }
+  footer .foot-links {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+  footer a { text-decoration: none; color: var(--rust-bright); }
+  footer a:hover { color: var(--cream); }
+  footer .fine { margin-top: 40px; color: var(--slate); font-size: 0.75rem; font-family: 'IBM Plex Mono', monospace; }
+
+  /* ---------- REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 680px) {
+    .hero .wrap { grid-template-columns: 1fr; text-align: left; }
+    .hero img { width: 120px; height: 120px; }
+    .skill-groups { grid-template-columns: 1fr; }
+    .cert-edu-grid { grid-template-columns: 1fr; }
+    nav .links { gap: 16px; }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--rust-bright);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">S. NG'ENO</div>
+    <div class="links">
+      <a href="#summary">Summary</a>
+      <a href="#journey">Journey</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img src="profile.jpg" alt="Portrait of Sylvia Ng'eno">
+    <div>
+      <h1>Sylvia Ng'eno</h1>
+      <div class="role">DevOps Engineer · Cloud Infrastructure · Site Reliability</div>
+      <p class="pitch">Fifteen years spent scaling technology across four countries and fifty thousand farmers now channelled into the infrastructure layer itself — AWS, Terraform, Docker, Kubernetes, and Linux.</p>
+      <div class="contact-row">
+        <span>Halifax, NS, Canada</span>
+        <span class="dot">·</span>
+        <a href="mailto:sylviacngeno@gmail.com">sylviacngeno@gmail.com</a>
+        <span class="dot">·</span>
+        <a href="tel:+17826402876">+1 782 640 2876</a>
+        <span class="dot">·</span>
+        <a href="https://linkedin.com/in/sylviangeno" target="_blank" rel="noopener">linkedin.com/in/sylviangeno</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="summary" class="summary reveal">
+  <div class="wrap">
+    <span class="eyebrow">Summary</span>
+    <h2>From distributed field networks to distributed systems</h2>
+    <p>DevOps-focused engineer with 15+ years of experience delivering large-scale, cloud-connected digital systems across the global agritech sector, now specializing in cloud infrastructure automation, CI/CD pipeline design, and containerized deployment. Hands-on training in AWS, Terraform, Docker, Kubernetes, and Linux administration, combined with a proven record of translating complex technical requirements into resilient, scalable solutions for distributed engineering teams. Adept at bridging engineering, operations, and stakeholder groups to accelerate release velocity, improve system reliability, and drive infrastructure modernization.</p>
+  </div>
+</section>
+
+<section id="journey" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">The Throughline</span>
+    <h2>Two decades, one pattern: connect the disconnected</h2>
+    <div class="journey">
+      <svg viewBox="0 0 820 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Career timeline from 2005 to present, visualized as a path moving from organic field-row curves to a rigid network grid.">
+        <!-- organic furrow lines (left / early career) morphing into circuit grid (right / devops) -->
+        <path d="M10,150 Q60,110 110,150 T210,150" fill="none" stroke="#8A9A5B" stroke-width="2" opacity="0.55"/>
+        <path d="M10,170 Q60,130 110,170 T210,170" fill="none" stroke="#8A9A5B" stroke-width="2" opacity="0.35"/>
+        <path d="M10,190 Q60,150 110,190 T210,190" fill="none" stroke="#8A9A5B" stroke-width="2" opacity="0.2"/>
+
+        <!-- transition line -->
+        <path d="M210,150 C 300,150 300,90 400,90" fill="none" stroke="#B5502D" stroke-width="2.5"/>
+
+        <!-- rigid grid (right / cloud infra) -->
+        <path d="M400,90 H520 V60 H660 V90 H800" fill="none" stroke="#D96A44" stroke-width="2.5"/>
+        <path d="M480,90 V130" stroke="#4C5A72" stroke-width="1.5" opacity="0.6"/>
+        <path d="M600,60 V30" stroke="#4C5A72" stroke-width="1.5" opacity="0.6"/>
+        <path d="M660,90 V130" stroke="#4C5A72" stroke-width="1.5" opacity="0.6"/>
+
+        <!-- nodes -->
+        <circle cx="30" cy="150" r="5" fill="#8A9A5B"/>
+        <circle cx="210" cy="150" r="5" fill="#8A9A5B"/>
+        <circle cx="400" cy="90" r="5.5" fill="#B5502D"/>
+        <circle cx="520" cy="90" r="5.5" fill="#D96A44"/>
+        <circle cx="660" cy="60" r="5.5" fill="#D96A44"/>
+        <circle cx="800" cy="90" r="6" fill="#EEE7DA"/>
+
+        <!-- labels -->
+        <text x="30" y="130" text-anchor="middle" class="node-label node-year">2005</text>
+        <text x="30" y="185" text-anchor="middle" class="node-label node-text">IT degree</text>
+
+        <text x="210" y="130" text-anchor="middle" class="node-label node-year">2011–2021</text>
+        <text x="210" y="185" text-anchor="middle" class="node-label node-text">Agritech PM</text>
+
+        <text x="400" y="70" text-anchor="middle" class="node-label node-year">2021–2025</text>
+        <text x="400" y="120" text-anchor="middle" class="node-label node-text">Systems Lead</text>
+
+        <text x="520" y="40" text-anchor="middle" class="node-label node-year">2024</text>
+        <text x="520" y="120" text-anchor="middle" class="node-label node-text">DevOps training</text>
+
+        <text x="660" y="40" text-anchor="middle" class="node-label node-year">2025</text>
+        <text x="660" y="120" text-anchor="middle" class="node-label node-text">Cloud &amp; K8s</text>
+
+        <text x="795" y="70" text-anchor="end" class="node-label node-year">Now</text>
+        <text x="795" y="120" text-anchor="end" class="node-label node-text">Building portfolio</text>
+      </svg>
+    </div>
+    <p class="journey-caption">Early career ran on organic, human-coordinated networks — SMS relays, peer farmer networks, sprint cycles across four countries. That same instinct for connecting distributed systems now points at infrastructure: pipelines, clusters, and cloud networks that scale the same way.</p>
+  </div>
+</section>
+
+<section id="skills" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">Technical Skills</span>
+    <h2>What I build with</h2>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Cloud &amp; Infrastructure</h3>
+        <div class="pills">
+          <span class="pill">AWS (EC2, VPC, S3, IAM)</span>
+          <span class="pill">Terraform</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Kubernetes</span>
+          <span class="pill">Linux Administration</span>
+          <span class="pill">Networking &amp; Security Groups</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>DevOps Practices</h3>
+        <div class="pills">
+          <span class="pill">CI/CD Pipeline Design</span>
+          <span class="pill">Git / Version Control</span>
+          <span class="pill">DevSecOps &amp; Cloud Security</span>
+          <span class="pill">Scalability &amp; Reliability</span>
+          <span class="pill">High-Availability Architecture</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Programming &amp; Web</h3>
+        <div class="pills">
+          <span class="pill">JavaScript</span>
+          <span class="pill">HTML5 / CSS3</span>
+          <span class="pill">API Integrations</span>
+          <span class="pill">Web Application Architecture</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Delivery &amp; Collaboration</h3>
+        <div class="pills">
+          <span class="pill">Agile / Scrum</span>
+          <span class="pill">Jira · ClickUp · Notion · Slack</span>
+          <span class="pill">Human-Centered Design</span>
+          <span class="pill">Enterprise SaaS Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">Experience</span>
+    <h2>Where the systems thinking was built</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Technical Systems &amp; Program Lead</span>
+        <span class="job-dates">Jan 2021 – Jan 2025</span>
+      </div>
+      <div class="job-org">Farmbetter &amp; Agripath</div>
+      <ul>
+        <li>Led deployment and iterative feature development of a mobile app and WhatsApp-based AI chatbot on cloud infrastructure, scaling digital advisory access to 50,000+ smallholder farmers across Uganda, Tanzania, India, and Nepal.</li>
+        <li>Directed cross-functional coordination between backend engineering, AI/ML, and infrastructure teams to standardize data pipelines and deployment processes across four countries.</li>
+        <li>Partnered with global research organizations (Kilimo Trust, Grameen Foundation, GIZ) to align technical architecture with multi-language, multi-region requirements, improving system uptime and content accessibility.</li>
+        <li>Presented predictive AI and cloud-based solution architectures at international technology summits (AGRF), securing strategic partnerships with GIZ and the University of Bern.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Senior Technical Project Manager &amp; Consultant</span>
+        <span class="job-dates">Jan 2011 – Jan 2021</span>
+      </div>
+      <div class="job-org">Agritech Systems (WeFarm, 2Kuze, CoAmana)</div>
+      <ul>
+        <li>Served as the primary technical liaison between engineering squads and operational stakeholders across multiple agritech platforms, translating business requirements into deployable technical specifications.</li>
+        <li>Coordinated deployment of SMS-based peer-to-peer data networks and micro-transaction systems in partnership with telecom providers and backend development teams.</li>
+        <li>Managed agile sprint planning, release cycles, and technical debt tracking across distributed engineering teams using Jira and ClickUp.</li>
+        <li>Facilitated alignment between product, engineering, and operations functions to accelerate release velocity and adoption.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Cloud &amp; DevOps Technical Projects</span>
+        <span class="job-dates">2024 – Present</span>
+      </div>
+      <div class="job-org">Self-directed</div>
+      <ul>
+        <li>Architected and deployed self-healing, highly available cloud infrastructure using Linux, Git, Docker, Kubernetes, CI/CD pipelines, Terraform, and AWS.</li>
+        <li>Built responsive web applications using native JavaScript with modular UI architecture and programmatic state management.</li>
+        <li>Designed and implemented an AI-driven digital assistant to automate context mapping and content operations workflows.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="credentials" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">Credentials</span>
+    <h2>Certifications &amp; Education</h2>
+    <div class="cert-edu-grid">
+      <div>
+        <h3>Certifications &amp; Training</h3>
+        <ul>
+          <li>DevOps Engineering Certification <span class="sub">10Alytics</span></li>
+          <li>Full-Stack Software Development Programme <span class="sub">Kodree</span></li>
+          <li>AI-Assisted Engineering Fundamentals <span class="sub">Udemy</span></li>
+          <li>Cybersecurity Analyst Certificate</li>
+          <li>AI Microcredentials <span class="sub">Digital Nova Scotia</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <ul>
+          <li>Master of Business Administration <span class="sub">United States International University — In Progress, since Feb 2023</span></li>
+          <li>B.Sc. Information Technology <span class="sub">Jomo Kenyatta University of Agriculture and Technology — 2005–2009</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Let's build reliable systems together</h2>
+    <div class="foot-links">
+      <a href="mailto:sylviacngeno@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/sylviangeno" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="../README.md">Portfolio Repo</a>
+    </div>
+    <div class="fine">Halifax, NS, Canada — built as part of an ongoing DevOps portfolio.</div>
+  </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(i => io.observe(i));
+</script>
+
+</body>
+</html>
