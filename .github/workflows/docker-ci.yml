@@ -1,0 +1,39 @@
+name: Docker Web App CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'dockerized-web-app/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'dockerized-web-app/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        working-directory: ./dockerized-web-app
+        run: docker build -t sylvia-devops-site:ci .
+
+      - name: Run container from built image
+        working-directory: ./dockerized-web-app
+        run: docker run -d -p 8080:80 --name ci-test-container sylvia-devops-site:ci
+
+      - name: Wait for container to be ready
+        run: sleep 3
+
+      - name: Verify site responds
+        run: |
+          RESPONSE=$(curl -s http://localhost:8080)
+          echo "$RESPONSE" | grep "Hello from a Docker Container" || (echo "Site content check failed" && exit 1)
+
+      - name: Clean up container
+        if: always()
+        run: docker rm -f ci-test-container
